@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="todo-app">
+            <div class="app-header">
+                <h2>To-Do List <i class="fas fa-list-check"></i></h2>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <div class="row">
+                <input type="text" id="input-box" placeholder="Add your task">
+                <div class="task-options">
+                    <select id="task-category">
+                        <option value="">Catégorie</option>
+                        <option value="travail">Travail</option>
+                        <option value="personnel">Personnel</option>
+                        <option value="courses">Courses</option>
+                        <option value="santé">Santé</option>
+                    </select>
+                    <select id="task-priority">
+                        <option value="normal">Priorité</option>
+                        <option value="low">Basse</option>
+                        <option value="normal">Normale</option>
+                        <option value="high">Haute</option>
+                    </select>
+                    <input type="date" id="task-date">
+                </div>
+                <button id="add-btn">Add</button>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+            <ul id="list-container">
+                <!-- Tasks will be added here dynamically -->
+            </ul>
+            <div class="footer">
+                <p><span id="task-counter">0</span> tasks left</p>
+                <div class="footer-actions">
+                    <button id="sort-tasks"><i class="fas fa-sort"></i> Trier</button>
+                    <button id="clear-completed">Clear Completed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="edit-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Modifier la tâche</h3>
+                <button class="close-modal" id="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="modal-input-box" placeholder="Titre de la tâche">
+                <select id="modal-task-category">
+                    <option value="">Catégorie</option>
+                    <option value="travail">Travail</option>
+                    <option value="personnel">Personnel</option>
+                    <option value="courses">Courses</option>
+                    <option value="santé">Santé</option>
+                </select>
+                <select id="modal-task-priority">
+                    <option value="normal">Priorité</option>
+                    <option value="low">Basse</option>
+                    <option value="normal">Normale</option>
+                    <option value="high">Haute</option>
+                </select>
+                <input type="date" id="modal-task-date">
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn btn-cancel" id="cancel-edit">Annuler</button>
+                <button class="modal-btn btn-save" id="save-edit">Sauvegarder</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
