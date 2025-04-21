@@ -695,22 +695,27 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Function to save data to localStorage
     function saveData() {
+        listContainer.querySelectorAll('li').forEach(task => {
+            task.style.display   = '';
+            task.style.opacity   = '';
+            task.style.transform = '';
+        });
         localStorage.setItem('todoData', listContainer.innerHTML);
     }
     
-    // Function to load tasks from localStorage
+    
     function loadTasks() {
         const savedTasks = localStorage.getItem('todoData');
         if (savedTasks) {
             listContainer.innerHTML = savedTasks;
-            
-            // Re-enable draggable attribute for all tasks
-            const tasks = listContainer.querySelectorAll('li');
-            tasks.forEach(task => {
+            listContainer.querySelectorAll('li').forEach(task => {
                 task.draggable = true;
+                // On supprime l’attribut style pour retrouver l’affichage normal
+                task.removeAttribute('style');
             });
         }
     }
+    
     
     // Check for due tasks when the app loads
     function checkDueTasks() {
