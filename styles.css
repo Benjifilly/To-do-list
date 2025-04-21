@@ -108,7 +108,7 @@ body {
     margin-bottom: 25px;
 }
 
-#input-box {
+#input-box, #task-description {
     width: 100%;
     border: none;
     outline: none;
@@ -117,6 +117,7 @@ body {
     font-size: 16px;
     border-radius: 30px;
     color: var(--text);
+    resize: none;
 }
 
 .task-options {
@@ -170,6 +171,51 @@ body {
     justify-content: center;
     gap: 10px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.search-container {
+    position: relative;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+
+#search-box {
+    border: none;
+    outline: none;
+    background: var(--input-bg);
+    padding: 8px 15px 8px 35px;
+    font-size: 14px;
+    border-radius: 20px;
+    color: var(--text);
+    transition: all 0.3s;
+    width: 180px;
+}
+
+#search-box:focus {
+    width: 220px;
+    background-color: var(--accent);
+    color: white;
+}
+
+#search-box:focus::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 14px;
+    pointer-events: none;
+    transition: color 0.3s;
+}
+
+#search-box:focus + .search-icon {
+    color: white;
 }
 
 .filter-btn {
@@ -207,6 +253,28 @@ ul li {
     transition: all 0.3s;
     color: var(--text);
     animation: fadeIn 0.3s ease-in-out;
+    opacity: 1;
+    transition: opacity 0.3s, transform 0.3s, background-color 0.3s;
+}
+
+/* Définition de l'animation pour barrer le texte */
+@keyframes strikethrough {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+/* Définition de l'animation pour le fade de l'opacité */
+@keyframes fadeColor {
+    from {
+        color: var(--text);
+    }
+    to {
+        color: var(--text-muted);
+    }
 }
 
 @keyframes fadeIn {
@@ -271,11 +339,33 @@ ul li::before {
 
 ul li.checked {
     color: var(--text-muted);
-    text-decoration: line-through;
+    position: relative;
+    transition: color 0.5s ease;
+    animation: fadeColor 0.5s forwards;
+}
+
+ul li.checked .task-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--text-muted);
+    animation: strikethrough 0.3s ease-in-out forwards;
+    pointer-events: none;
+    z-index: 1;
+    max-width: 100%;
+}
+
+ul li .task-text {
+    position: relative;
+    display: inline-block;
 }
 
 ul li.checked .task-meta {
     opacity: 0.6;
+    transition: opacity 0.5s ease;
 }
 
 ul li.checked::before {
@@ -414,7 +504,8 @@ ul li.checked::before {
 }
 
 .modal-body input, 
-.modal-body select {
+.modal-body select,
+.modal-body textarea {
     padding: 12px 15px;
     border: none;
     background: var(--input-bg);
@@ -422,6 +513,7 @@ ul li.checked::before {
     color: var(--text);
     width: 100%;
     font-size: 16px;
+    resize: none;
 }
 
 .modal-footer {
@@ -518,4 +610,7 @@ ul li.checked::before {
         width: 100%;
         justify-content: space-between;
     }
+}
+#view-description {
+    color: var(--text);
 }

@@ -18,6 +18,7 @@
             </div>
             <div class="row">
                 <input type="text" id="input-box" placeholder="Add your task">
+                <textarea id="task-description" placeholder="Description de la tâche (optionnel)"></textarea>
                 <div class="task-options">
                     <select id="task-category">
                         <option value="">Catégorie</option>
@@ -41,6 +42,10 @@
                 <button class="filter-btn" data-filter="active">Active</button>
                 <button class="filter-btn" data-filter="completed">Completed</button>
             </div>
+            <div class="search-container">
+                <input type="text" id="search-box" placeholder="Search tasks...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
             <ul id="list-container">
                 <!-- Tasks will be added here dynamically -->
             </ul>
@@ -61,6 +66,7 @@
             </div>
             <div class="modal-body">
                 <input type="text" id="modal-input-box" placeholder="Titre de la tâche">
+                <textarea id="modal-task-description" placeholder="Description de la tâche (optionnel)"></textarea>
                 <select id="modal-task-category">
                     <option value="">Catégorie</option>
                     <option value="travail">Travail</option>
@@ -79,6 +85,20 @@
             <div class="modal-footer">
                 <button class="modal-btn btn-cancel" id="cancel-edit">Annuler</button>
                 <button class="modal-btn btn-save" id="save-edit">Sauvegarder</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="view-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Description de la tâche</h3>
+                <button class="close-modal" id="close-view"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p id="view-description" style="white-space: pre-wrap;"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn btn-cancel" id="close-view-btn">Fermer</button>
             </div>
         </div>
     </div>
