@@ -47,8 +47,4 @@ todo-app/
 
 ## Future Enhancements
 
-- Task categories/tags
-- Due dates for tasks
-- Priority levels
-- Dark/Light theme toggle
-- Drag and drop to reorder tasks
+- To be able to custumize category and background
