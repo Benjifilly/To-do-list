@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalTaskPriority = document.getElementById('modal-task-priority');
     const modalTaskDate = document.getElementById('modal-task-date');
     const modalTaskDescription = document.getElementById('modal-task-description');
+    
 
     const viewModal       = document.getElementById('view-modal');
     const closeViewBtns   = [document.getElementById('close-view'), document.getElementById('close-view-btn')];
@@ -43,6 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load tasks from localStorage
     loadTasks();
     updateTaskCounter();
+
+    addToggleInputButton();
+
     
     // Add task when clicking the add button
     addBtn.addEventListener('click', addTask);
@@ -764,6 +768,119 @@ document.addEventListener('DOMContentLoaded', () => {
             viewDescription.textContent = '';
         }, 300);
     }));
+
+    function addToggleInputButton() {
+        // Créer le bouton de bascule avec une icône FontAwesome
+        const toggleButton = document.createElement('button');
+        toggleButton.id = 'toggle-input';
+        toggleButton.className = 'toggle-input-btn';
+        toggleButton.innerHTML = '<i class="fas fa-chevron-down"></i>';
+        toggleButton.title = 'Cacher la section d\'entrée';
+        
+        // Déterminer où insérer le bouton - juste après l'en-tête mais avant la rangée d'input
+        const appHeader = document.querySelector('.app-header');
+        const inputSection = document.querySelector('.row');
+        appHeader.parentNode.insertBefore(toggleButton, inputSection);
+        
+        // État initial (visible)
+        let inputVisible = true;
+        
+        // Gérer le clic sur le bouton
+        toggleButton.addEventListener('click', function() {
+          inputVisible = !inputVisible;
+          
+          if (inputVisible) {
+            // Montrer la section d'entrée
+            inputSection.classList.remove('hidden');
+            inputSection.classList.add('animate-in');
+            inputSection.classList.remove('animate-out');
+            setTimeout(() => {
+              inputSection.style.display = 'flex';
+            }, 10);
+            toggleButton.innerHTML = '<i class="fas fa-chevron-down"></i>';
+            toggleButton.title = 'Cacher la section d\'entrée';
+          } else {
+            // Cacher la section d'entrée
+            inputSection.classList.add('animate-out');
+            inputSection.classList.remove('animate-in');
+            inputSection.classList.add('hidden');
+            toggleButton.innerHTML = '<i class="fas fa-chevron-up"></i>';
+            toggleButton.title = 'Afficher la section d\'entrée';
+            
+            // Attendre la fin de l'animation avant de cacher complètement
+            setTimeout(() => {
+              if (!inputVisible) {
+                inputSection.style.display = 'none';
+              }
+            }, 300);
+          }
+        });
+        
+        // Ajouter les styles CSS nécessaires
+        const styleElement = document.createElement('style');
+        styleElement.textContent = `
+          .todo-app {
+            position: relative;
+          }
+          
+          .toggle-input-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            margin: -15px auto 10px;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background-color 0.3s;
+          }
+          
+          .toggle-input-btn:hover {
+            transform: translateY(-2px);
+            background-color: var(--accent);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+          }
+          
+          .row {
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            overflow: hidden;
+            max-height: 500px;
+          }
+          
+          .row.hidden {
+            max-height: 0;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+          }
+          
+          @keyframes slideDown {
+            from { max-height: 0; opacity: 0; }
+            to { max-height: 500px; opacity: 1; }
+          }
+          
+          @keyframes slideUp {
+            from { max-height: 500px; opacity: 1; }
+            to { max-height: 0; opacity: 0; }
+          }
+          
+          .row.animate-in {
+            animation: slideDown 0.5s forwards;
+          }
+          
+          .row.animate-out {
+            animation: slideUp 0.5s forwards;
+          }
+        `;
+        document.head.appendChild(styleElement);
+      }
+      
     
     
     // Check for due tasks when the app loads (with a slight delay)
