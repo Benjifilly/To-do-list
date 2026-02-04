@@ -17,9 +17,14 @@
         <div class="todo-app">
             <div class="app-header">
                 <h2>To-Do List <i class="fas fa-list-check"></i></h2>
-                <button id="theme-toggle" class="theme-toggle">
-                    <i class="fas fa-moon"></i>
-                </button>
+                <div class="header-actions">
+                    <button id="settings-btn" class="theme-toggle" title="Paramètres">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <button id="theme-toggle" class="theme-toggle" title="Thème">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
             </div>
             <div class="row">
                 <input type="text" id="input-box" placeholder="Add your task">
@@ -27,10 +32,6 @@
                 <div class="task-options">
                     <select id="task-category">
                         <option value="">Catégorie</option>
-                        <option value="travail">Travail</option>
-                        <option value="personnel">Personnel</option>
-                        <option value="courses">Courses</option>
-                        <option value="santé">Santé</option>
                     </select>
                     <select id="task-priority">
                         <option value="normal">Priorité</option>
@@ -74,10 +75,6 @@
                 <textarea id="modal-task-description" placeholder="Description de la tâche (optionnel)"></textarea>
                 <select id="modal-task-category">
                     <option value="">Catégorie</option>
-                    <option value="travail">Travail</option>
-                    <option value="personnel">Personnel</option>
-                    <option value="courses">Courses</option>
-                    <option value="santé">Santé</option>
                 </select>
                 <select id="modal-task-priority">
                     <option value="normal">Priorité</option>
@@ -107,6 +104,31 @@
             </div>
         </div>
     </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settings-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Paramètres</h3>
+                <button class="close-modal" id="close-settings"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <h4>Gérer les catégories</h4>
+                <div id="settings-categories-list" class="settings-list">
+                    <!-- Categories will be added here -->
+                </div>
+                <div class="add-category-form">
+                    <input type="text" id="new-category-name" placeholder="Nom de la catégorie">
+                    <input type="color" id="new-category-color" value="#3b82f6" title="Choisir une couleur">
+                    <button id="add-category-btn" class="modal-btn btn-save" title="Ajouter"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn btn-save" id="close-settings-btn">Fermer</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
